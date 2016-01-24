@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Livewallpaper</string>
+    <string name="wallpaper_settings">Settings</string>
+    <string name="myCoolButton">myCoolButton</string>
+</resources>

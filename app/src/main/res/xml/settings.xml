@@ -1,0 +1,9 @@
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/wallpaper_settings"
+   >
+    <Preference android:title="Acts like a button"
+        android:key="@string/myCoolButton"
+        android:summary="This is a cool button"
+        android:widgetLayout="@layout/button" />
+</PreferenceScreen>

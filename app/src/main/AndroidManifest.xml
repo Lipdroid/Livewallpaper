@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.test.lipuhossain.livewallpaper">
+    <uses-feature
+        android:name="android.software.live_wallpaper"
+        android:required="true" >
+    </uses-feature>
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <!-- =========================================================== -->
+        <!-- Launcher -->
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!-- ==============================================================-->
+        <!-- Live Wallpaper -->
+        <service
+            android:name=".GIFWallpaperService"
+            android:enabled="true"
+            android:label="GIF Wallpaper"
+            android:permission="android.permission.BIND_WALLPAPER" >
+            <intent-filter>
+                <action android:name="android.service.wallpaper.WallpaperService"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.service.wallpaper"
+                android:resource="@xml/wallpaper" >
+            </meta-data>
+        </service>
+        <!-- ================================================================= -->
+        <!-- Preferences -->
+        <activity
+            android:name=".Prefs"
+            android:label="@string/wallpaper_settings"
+            android:theme="@android:style/Theme.WallpaperSettings"
+            android:exported="true">
+            <intent-filter>
+                <category android:name="android.intent.category.PREFERENCE" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
