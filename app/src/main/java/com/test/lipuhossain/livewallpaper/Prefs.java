@@ -2,7 +2,6 @@ package com.test.lipuhossain.livewallpaper;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.util.Log;
 import android.view.View;
@@ -19,7 +18,7 @@ public class Prefs extends PreferenceActivity
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         Log.w("Prefs", "prefs onCreate");
-        setContentView(R.layout.button);
+        setContentView(R.layout.custom_prefs);
         addPreferencesFromResource(R.xml.settings);
 //        getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
         Button button = (Button) findViewById(R.id.button);

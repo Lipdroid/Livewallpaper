@@ -5,5 +5,5 @@
     <Preference android:title="Acts like a button"
         android:key="@string/myCoolButton"
         android:summary="This is a cool button"
-        android:widgetLayout="@layout/button" />
+        android:widgetLayout="@layout/custom_prefs" />
 </PreferenceScreen>
