@@ -13,75 +13,47 @@ import java.io.IOException;
  * Created by Lipu Hossain on 24/01/2016.
  */
 public class GIFWallpaperService extends WallpaperService {
-    @Override
+      @Override
     public Engine onCreateEngine() {
-        try {
-            Movie movie = Movie.decodeStream(
-                    getResources().getAssets().open("monster.gif"));
-
-            return new GIFWallpaperEngine(movie);
-        } catch (IOException e) {
-            Log.d("GIF", "Could not load asset");
-            return null;
-        }
+        return new AquariumWallpaperEngine();
     }
 
-    private class GIFWallpaperEngine extends WallpaperService.Engine {
-        private final int frameDuration = 20;
 
-        private SurfaceHolder holder;
-        private Movie movie;
-        private boolean visible;
-        private Handler handler;
+    class AquariumWallpaperEngine extends Engine {
 
-        public GIFWallpaperEngine(Movie movie) {
-            this.movie = movie;
-            handler = new Handler();
-        }
+        private Aquarium _aquarium;
 
-        @Override
-        public void onCreate(SurfaceHolder surfaceHolder) {
-            super.onCreate(surfaceHolder);
-            this.holder = surfaceHolder;
-        }
-
-        private Runnable drawGIF = new Runnable() {
-            public void run() {
-                draw();
-            }
-        };
-
-        private void draw() {
-            if (visible) {
-                Canvas canvas = holder.lockCanvas();
-                canvas.save();
-                // Adjust size and position so that
-                // the image looks good on your screen
-                canvas.scale(3f, 3f);
-                movie.draw(canvas, -100, 0);
-                canvas.restore();
-                holder.unlockCanvasAndPost(canvas);
-                movie.setTime((int) (System.currentTimeMillis() % movie.duration()));
-
-                handler.removeCallbacks(drawGIF);
-                handler.postDelayed(drawGIF, frameDuration);
-            }
+        public AquariumWallpaperEngine() {
+            this._aquarium = new Aquarium();
+            this._aquarium.initialize(getBaseContext(), getSurfaceHolder());
         }
 
         @Override
         public void onVisibilityChanged(boolean visible) {
-            this.visible = visible;
             if (visible) {
-                handler.post(drawGIF);
-            } else {
-                handler.removeCallbacks(drawGIF);
+                if (getSurfaceHolder().getSurface().isValid())
+                    this._aquarium.render();
             }
         }
 
         @Override
-        public void onDestroy() {
-            super.onDestroy();
-            handler.removeCallbacks(drawGIF);
+        public void onSurfaceChanged(SurfaceHolder holder, int format,
+                                     int width, int height) {
+            super.onSurfaceChanged(holder, format, width, height);
+        }
+
+        @Override
+        public void onSurfaceCreated(SurfaceHolder holder) {
+            super.onSurfaceCreated(holder);
+            this._aquarium.start();
+        }
+
+        @Override
+        public void onSurfaceDestroyed(SurfaceHolder holder) {
+            super.onSurfaceDestroyed(holder);
+            this._aquarium.stop();
+
+
         }
     }
 
