@@ -5,7 +5,9 @@ import android.graphics.Movie;
 import android.os.Handler;
 import android.service.wallpaper.WallpaperService;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
+import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -24,12 +26,14 @@ public class GIFWallpaperService extends WallpaperService {
         private Aquarium _aquarium;
 
         public AquariumWallpaperEngine() {
+            Log.e("WALLPAPERSERVICE","Constructor");
             this._aquarium = new Aquarium();
             this._aquarium.initialize(getBaseContext(), getSurfaceHolder());
         }
 
         @Override
         public void onVisibilityChanged(boolean visible) {
+            Log.e("WALLPAPERSERVICE","onVisibilityChanged");
             if (visible) {
                 if (getSurfaceHolder().getSurface().isValid())
                     this._aquarium.render();
@@ -39,21 +43,32 @@ public class GIFWallpaperService extends WallpaperService {
         @Override
         public void onSurfaceChanged(SurfaceHolder holder, int format,
                                      int width, int height) {
+            Log.e("WALLPAPERSERVICE","onSurfaceChanged");
+
             super.onSurfaceChanged(holder, format, width, height);
         }
 
+
         @Override
         public void onSurfaceCreated(SurfaceHolder holder) {
+            Log.e("WALLPAPERSERVICE","onSurfaceCreated");
             super.onSurfaceCreated(holder);
             this._aquarium.start();
         }
 
         @Override
         public void onSurfaceDestroyed(SurfaceHolder holder) {
+            Log.e("WALLPAPERSERVICE","onSurfaceDestroyed");
             super.onSurfaceDestroyed(holder);
             this._aquarium.stop();
 
 
+        }
+
+        @Override
+        public void onTouchEvent(MotionEvent event) {
+            super.onTouchEvent(event);
+            Toast.makeText(getApplicationContext(),"",Toast.LENGTH_LONG).show();
         }
     }
 

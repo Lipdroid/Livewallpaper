@@ -30,10 +30,18 @@ public class Aquarium {
 					this.onDraw(canvas);
 			}
 
-		}finally{
-			if(canvas != null){
-				this._surfaceHolder.unlockCanvasAndPost(canvas);
-				isReleased = true;
+		}catch (Exception e){
+			e.printStackTrace();
+
+		}
+		finally{
+			try {
+				if (canvas != null) {
+					this._surfaceHolder.unlockCanvasAndPost(canvas);
+					isReleased = true;
+				}
+			}catch (IllegalArgumentException e){
+				e.printStackTrace();
 			}
 		}	
 	}
@@ -84,12 +92,12 @@ public class Aquarium {
 
 	private void addFishes() {		
 		Point startPoint = new Point(100, 100);
-		this._fishes.add(new ClownFish(this._context, this, startPoint, 90));
+		this._fishes.add(new ClownFish(this._context, this, startPoint, 100));
 		Point startPoint1 = new Point(100, 300);
-		this._fishes.add(new ClownFish(this._context, this, startPoint1, 50));
+		this._fishes.add(new ClownFish(this._context, this, startPoint1, 90));
 		
 		Point startPoint2 = new Point(200, 200);
-		this._fishes.add(new ClownFish(this._context, this, startPoint2, 15));
+		this._fishes.add(new ClownFish(this._context, this, startPoint2, 80));
 	}
 	
 	private void renderBackGround(Canvas canvas)

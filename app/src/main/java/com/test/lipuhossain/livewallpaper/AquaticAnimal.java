@@ -27,7 +27,7 @@ public abstract class AquaticAnimal implements Renderable {
 	protected void initialize(Bitmap leftBitmap, Bitmap rightBitmap, int fps, int totalFrames, Point startPoint, int speed){
 		this._leftSprite = new FishSprite(leftBitmap, fps, totalFrames, startPoint);
 		this._rightSprite = new FishSprite(rightBitmap, fps, totalFrames, startPoint);		
-		this._speedFraction = (MAX_SPEED / speed) * 10;		 
+		this._speedFraction = (MAX_SPEED / speed) * 10;
 	}
 	
 	private FishSprite getSprite(){
@@ -66,7 +66,7 @@ public abstract class AquaticAnimal implements Renderable {
 	public void render(Canvas canvas){
 		long currentTime = System.currentTimeMillis();
 		this.getSprite().render(canvas, currentTime);
-		this.swim(currentTime);
+		this.swim(currentTime+1000000);
 	}
 	
 	public void swim(long currentTime){
