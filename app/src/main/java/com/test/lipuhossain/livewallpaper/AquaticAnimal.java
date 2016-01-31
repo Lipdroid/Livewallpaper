@@ -66,7 +66,7 @@ public abstract class AquaticAnimal implements Renderable {
 	public void render(Canvas canvas){
 		long currentTime = System.currentTimeMillis();
 		this.getSprite().render(canvas, currentTime);
-		this.swim(currentTime+1000000);
+		this.swim(currentTime);
 	}
 	
 	public void swim(long currentTime){
